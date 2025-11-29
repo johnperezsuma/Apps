@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -149,9 +150,9 @@ model Event {
 }
 
 model EventAttendee {
-  id          String   @id @default(uuid())
-  eventId     String
-  userId      String
+  id          String   @id @default(uuid()) @db.Uuid
+  eventId     String   @db.Text
+  userId      String   @db.Uuid
   event       Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
   user        users     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())

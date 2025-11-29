@@ -18,7 +18,8 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        const user = await prisma.user.findUnique({
+        // 👉 Cambiar prisma.user por prisma.userDashboard
+        const user = await prisma.userDashboard.findUnique({
           where: {
             email: credentials.email as string,
           },

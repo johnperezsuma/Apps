@@ -47,3 +47,4 @@ export function DeleteEventTableButton({ eventId }: DeleteEventTableButtonProps)
 }
 
 
+
