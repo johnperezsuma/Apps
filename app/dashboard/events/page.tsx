@@ -19,29 +19,29 @@ export default async function EventsPage() {
     <div>
       <div className="mb-8 flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Eventos</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Events</h1>
           <p className="text-gray-600">
-            Gestiona todos tus eventos
+            Manage all your events
           </p>
         </div>
         <Link
           href="/dashboard/events/create"
           className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
         >
-          Crear Evento
+          Create Event
         </Link>
       </div>
 
       {events.length === 0 ? (
         <div className="bg-white rounded-lg shadow p-12 text-center">
           <p className="text-gray-500 text-lg mb-4">
-            No tienes eventos creados aún
+            You don't have any events created yet
           </p>
           <Link
             href="/dashboard/events/create"
             className="text-indigo-600 hover:text-indigo-700 font-semibold"
           >
-            Crear tu primer evento →
+            Create your first event →
           </Link>
         </div>
       ) : (
@@ -50,19 +50,19 @@ export default async function EventsPage() {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Evento
+                  Event
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Ubicación
+                  Location
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Fecha
+                  Date
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Hora
+                  Time
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Acciones
+                  Actions
                 </th>
               </tr>
             </thead>
@@ -99,13 +99,13 @@ export default async function EventsPage() {
                         href={`/dashboard/events/${event.id}`}
                         className="text-indigo-600 hover:text-indigo-900"
                       >
-                        Ver
+                        View
                       </Link>
                       <Link
                         href={`/dashboard/events/${event.id}/edit`}
                         className="text-indigo-600 hover:text-indigo-900"
                       >
-                        Editar
+                        Edit
                       </Link>
                       <DeleteEventTableButton eventId={event.id} />
                     </div>

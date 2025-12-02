@@ -12,7 +12,7 @@ export function DeleteEventTableButton({ eventId }: DeleteEventTableButtonProps)
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async () => {
-    if (!confirm("¿Estás seguro de que deseas eliminar este evento?")) {
+    if (!confirm("Are you sure you want to delete this event?")) {
       return;
     }
 
@@ -23,13 +23,13 @@ export function DeleteEventTableButton({ eventId }: DeleteEventTableButtonProps)
       });
 
       if (!response.ok) {
-        throw new Error("Error al eliminar el evento");
+        throw new Error("Error deleting event");
       }
 
       router.refresh();
     } catch (error) {
       console.error("Error deleting event:", error);
-      alert("Error al eliminar el evento");
+      alert("Error deleting event");
     } finally {
       setIsDeleting(false);
     }
@@ -41,7 +41,7 @@ export function DeleteEventTableButton({ eventId }: DeleteEventTableButtonProps)
       disabled={isDeleting}
       className="text-red-600 hover:text-red-900 disabled:opacity-50 disabled:cursor-not-allowed"
     >
-      {isDeleting ? "Eliminando..." : "Eliminar"}
+      {isDeleting ? "Deleting..." : "Delete"}
     </button>
   );
 }

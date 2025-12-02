@@ -34,13 +34,13 @@ export default function SignInPage() {
       });
 
       if (result?.error) {
-        setError("Email o contraseña incorrectos");
+        setError("Incorrect email or password");
         setLoading(false);
       } else if (result?.ok) {
         router.push("/dashboard");
         router.refresh();
       } else {
-        setError("Error al iniciar sesión");
+        setError("Error signing in");
         setLoading(false);
       }
     } catch (error) {
@@ -54,10 +54,10 @@ export default function SignInPage() {
       <div className="max-w-md w-full mx-4">
         <div className="bg-white rounded-lg shadow-xl p-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
-            Iniciar Sesión
+            Sign In
           </h1>
           <p className="text-gray-600 mb-8 text-center">
-            Ingresa tus credenciales para acceder
+            Enter your credentials to access
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -90,7 +90,7 @@ export default function SignInPage() {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
-                Contraseña
+                Password
               </label>
               <input
                 id="password"
@@ -108,19 +108,19 @@ export default function SignInPage() {
               disabled={loading}
               className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "Iniciando sesión..." : "Iniciar Sesión"}
+              {loading ? "Signing in..." : "Sign In"}
             </button>
           </form>
 
           {isAdmin && (
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
-                ¿No tienes una cuenta?{" "}
+                Don't have an account?{" "}
                 <Link
                   href="/sign-up"
                   className="text-indigo-600 hover:text-indigo-700 font-semibold"
                 >
-                  Regístrate
+                  Sign up
                 </Link>
               </p>
             </div>

@@ -8,13 +8,13 @@ import { useRouter } from "next/navigation";
 import type { Event } from "@prisma/client";
 
 const eventSchema = z.object({
-  title: z.string().min(1, "El título es requerido"),
+  title: z.string().min(1, "Title is required"),
   description: z.string().optional(),
-  location: z.string().min(1, "La ubicación es requerida"),
-  city: z.string().min(1, "La ciudad es requerida"),
-  date: z.string().min(1, "La fecha es requerida"),
-  startTime: z.string().regex(/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/, "Formato de hora inválido (HH:mm)"),
-  endTime: z.string().regex(/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/, "Formato de hora inválido (HH:mm)"),
+  location: z.string().min(1, "Location is required"),
+  city: z.string().min(1, "City is required"),
+  date: z.string().min(1, "Date is required"),
+  startTime: z.string().regex(/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format (HH:mm)"),
+  endTime: z.string().regex(/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/, "Invalid time format (HH:mm)"),
 });
 
 type EventFormData = z.infer<typeof eventSchema>;
@@ -53,7 +53,7 @@ export function EventForm({ event }: EventFormProps) {
 
     try {
       if (event && !event.id) {
-        throw new Error("El evento no tiene un ID válido");
+        throw new Error("Event does not have a valid ID");
       }
 
       const url = event
@@ -72,13 +72,13 @@ export function EventForm({ event }: EventFormProps) {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Error al guardar el evento");
+        throw new Error(errorData.error || "Error saving event");
       }
 
       router.push("/dashboard/events");
       router.refresh();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error al guardar el evento");
+      setError(err instanceof Error ? err.message : "Error saving event");
     } finally {
       setIsSubmitting(false);
     }
@@ -95,14 +95,14 @@ export function EventForm({ event }: EventFormProps) {
       <div className="space-y-6">
         <div>
           <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
-            Título del Evento *
+            Event Title *
           </label>
           <input
             type="text"
             id="title"
             {...register("title")}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
-            placeholder="Ej: Conferencia de Tecnología"
+            placeholder="e.g., Technology Conference"
           />
           {errors.title && (
             <p className="mt-1 text-sm text-red-600">{errors.title.message}</p>
@@ -111,14 +111,14 @@ export function EventForm({ event }: EventFormProps) {
 
         <div>
           <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-            Descripción
+            Description
           </label>
           <textarea
             id="description"
             {...register("description")}
             rows={4}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
-            placeholder="Describe tu evento..."
+            placeholder="Describe your event..."
           />
           {errors.description && (
             <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>
@@ -128,14 +128,14 @@ export function EventForm({ event }: EventFormProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
-              Ubicación *
+              Location *
             </label>
             <input
               type="text"
               id="location"
               {...register("location")}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
-              placeholder="Ej: Centro de Convenciones"
+              placeholder="e.g., Convention Center"
             />
             {errors.location && (
               <p className="mt-1 text-sm text-red-600">{errors.location.message}</p>
@@ -144,14 +144,14 @@ export function EventForm({ event }: EventFormProps) {
 
           <div>
             <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
-              Ciudad *
+              City *
             </label>
             <input
               type="text"
               id="city"
               {...register("city")}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900 bg-white"
-              placeholder="Ej: Madrid"
+              placeholder="e.g., Madrid"
             />
             {errors.city && (
               <p className="mt-1 text-sm text-red-600">{errors.city.message}</p>
@@ -161,7 +161,7 @@ export function EventForm({ event }: EventFormProps) {
 
         <div>
           <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-2">
-            Fecha del Evento *
+            Event Date *
           </label>
           <input
             type="date"
@@ -177,7 +177,7 @@ export function EventForm({ event }: EventFormProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label htmlFor="startTime" className="block text-sm font-medium text-gray-700 mb-2">
-              Hora de Inicio (HH:mm) *
+              Start Time (HH:mm) *
             </label>
             <input
               type="time"
@@ -192,7 +192,7 @@ export function EventForm({ event }: EventFormProps) {
 
           <div>
             <label htmlFor="endTime" className="block text-sm font-medium text-gray-700 mb-2">
-              Hora de Fin (HH:mm) *
+              End Time (HH:mm) *
             </label>
             <input
               type="time"
@@ -213,14 +213,14 @@ export function EventForm({ event }: EventFormProps) {
           onClick={() => router.back()}
           className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
         >
-          Cancelar
+          Cancel
         </button>
         <button
           type="submit"
           disabled={isSubmitting}
           className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isSubmitting ? "Guardando..." : event ? "Actualizar" : "Crear"} Evento
+          {isSubmitting ? "Saving..." : event ? "Update" : "Create"} Event
         </button>
       </div>
     </form>

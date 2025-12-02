@@ -20,14 +20,14 @@ export function DeleteEventButton({ eventId }: DeleteEventButtonProps) {
       });
 
       if (!response.ok) {
-        throw new Error("Error al eliminar el evento");
+        throw new Error("Error deleting event");
       }
 
       router.push("/dashboard/events");
       router.refresh();
     } catch (error) {
       console.error("Error deleting event:", error);
-      alert("Error al eliminar el evento");
+      alert("Error deleting event");
     } finally {
       setIsDeleting(false);
       setShowConfirm(false);
@@ -42,13 +42,13 @@ export function DeleteEventButton({ eventId }: DeleteEventButtonProps) {
           disabled={isDeleting}
           className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors disabled:opacity-50"
         >
-          {isDeleting ? "Eliminando..." : "Confirmar"}
+          {isDeleting ? "Deleting..." : "Confirm"}
         </button>
         <button
           onClick={() => setShowConfirm(false)}
           className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition-colors"
         >
-          Cancelar
+          Cancel
         </button>
       </div>
     );
@@ -59,7 +59,7 @@ export function DeleteEventButton({ eventId }: DeleteEventButtonProps) {
       onClick={() => setShowConfirm(true)}
       className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
     >
-      Eliminar
+      Delete
     </button>
   );
 }

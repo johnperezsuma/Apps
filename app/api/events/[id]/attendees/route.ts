@@ -12,7 +12,7 @@ export async function GET(
 
     if (!userId) {
       return NextResponse.json(
-        { error: "No autorizado" },
+        { error: "Unauthorized" },
         { status: 401 }
       );
     }
@@ -27,7 +27,7 @@ export async function GET(
 
     if (!event) {
       return NextResponse.json(
-        { error: "Evento no encontrado" },
+        { error: "Event not found" },
         { status: 404 }
       );
     }
@@ -55,7 +55,7 @@ export async function GET(
 
     if (!eventWithAttendees) {
       return NextResponse.json(
-        { error: "Evento no encontrado" },
+        { error: "Event not found" },
         { status: 404 }
       );
     }
@@ -64,7 +64,7 @@ export async function GET(
   } catch (error) {
     console.error("Error fetching event attendees:", error);
     return NextResponse.json(
-      { error: "Error al obtener los asistentes del evento" },
+      { error: "Error fetching event attendees" },
       { status: 500 }
     );
   }

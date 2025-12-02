@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
 
     if (!currentUserId) {
       return NextResponse.json(
-        { error: "No autorizado" },
+        { error: "Unauthorized" },
         { status: 401 }
       );
     }
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     if (!event) {
       return NextResponse.json(
-        { error: "Evento no encontrado" },
+        { error: "Event not found" },
         { status: 404 }
       );
     }
@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
 
     if (!user) {
       return NextResponse.json(
-        { error: "Usuario no encontrado" },
+        { error: "User not found" },
         { status: 404 }
       );
     }
@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
 
     if (existingAttendee) {
       return NextResponse.json(
-        { error: "El usuario ya está registrado en este evento" },
+        { error: "User is already registered for this event" },
         { status: 400 }
       );
     }
@@ -93,14 +93,14 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Datos inválidos", details: error.errors },
+        { error: "Invalid data", details: error.errors },
         { status: 400 }
       );
     }
 
     console.error("Error registering attendee:", error);
     return NextResponse.json(
-      { error: "Error al registrar el asistente" },
+      { error: "Error registering attendee" },
       { status: 500 }
     );
   }
@@ -112,7 +112,7 @@ export async function GET(request: NextRequest) {
 
     if (!userId) {
       return NextResponse.json(
-        { error: "No autorizado" },
+        { error: "Unauthorized" },
         { status: 401 }
       );
     }
@@ -168,7 +168,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Error fetching attendees:", error);
     return NextResponse.json(
-      { error: "Error al obtener los asistentes" },
+      { error: "Error fetching attendees" },
       { status: 500 }
     );
   }

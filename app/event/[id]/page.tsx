@@ -37,7 +37,7 @@ export default async function PublicEventPage({
               <div className="space-y-6">
                 <div>
                   <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                    Detalles del Evento
+                    Event Details
                   </h2>
                   <div className="space-y-4">
                     <div className="flex items-start">
@@ -66,7 +66,7 @@ export default async function PublicEventPage({
                     <div className="flex items-start">
                       <span className="text-2xl mr-3">👤</span>
                       <div>
-                        <p className="font-medium text-gray-900">Organizado por</p>
+                        <p className="font-medium text-gray-900">Organized by</p>
                         <p className="text-gray-600">{event.userCreator}</p>
                       </div>
                     </div>
@@ -77,7 +77,7 @@ export default async function PublicEventPage({
               {event.qrImage && (
                 <div className="flex flex-col items-center justify-center">
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                    Escanea el código QR
+                    Scan the QR code
                   </h3>
                   <div className="p-4 bg-white border-2 border-gray-200 rounded-lg">
                     <QRImage
@@ -93,7 +93,7 @@ export default async function PublicEventPage({
                     download={`qr-${event.title.replace(/\s+/g, "-")}.png`}
                     className="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
                   >
-                    Descargar QR
+                    Download QR
                   </a>
                 </div>
               )}

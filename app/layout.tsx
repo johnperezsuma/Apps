@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Event Manager",
-  description: "Gestiona tus eventos de manera fácil",
+  description: "Manage your events easily",
 };
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="en">
       <body className={inter.className}>
         <Providers>{children}</Providers>
       </body>

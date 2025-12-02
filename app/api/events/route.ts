@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
         startTime: validatedData.startTime,
         endTime: validatedData.endTime,
         createdBy: "default-user",
-        userCreator: "Usuario",
+        userCreator: "User",
         qrImage: qrImageUrl,
       },
     });
@@ -74,14 +74,14 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Datos inválidos", details: error.errors },
+        { error: "Invalid data", details: error.errors },
         { status: 400 }
       );
     }
 
     console.error("Error creating event:", error);
     return NextResponse.json(
-      { error: "Error al crear el evento" },
+      { error: "Error creating event" },
       { status: 500 }
     );
   }
@@ -100,7 +100,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error("Error fetching events:", error);
     return NextResponse.json(
-      { error: "Error al obtener los eventos" },
+      { error: "Error fetching events" },
       { status: 500 }
     );
   }

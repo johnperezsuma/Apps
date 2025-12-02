@@ -27,14 +27,14 @@ export async function GET(
     });
 
     if (!event) {
-      return NextResponse.json({ error: "Evento no encontrado" }, { status: 404 });
+      return NextResponse.json({ error: "Event not found" }, { status: 404 });
     }
 
     return NextResponse.json(event);
   } catch (error) {
     console.error("Error fetching event:", error);
     return NextResponse.json(
-      { error: "Error al obtener el evento" },
+      { error: "Error fetching event" },
       { status: 500 }
     );
   }
@@ -57,13 +57,13 @@ export async function PUT(
     });
 
     if (!event) {
-      return NextResponse.json({ error: "Evento no encontrado" }, { status: 404 });
+      return NextResponse.json({ error: "Event not found" }, { status: 404 });
     }
 
     // Si hay autenticación, verificar que el usuario es el creador
     if (userId && event.createdBy !== userId && event.createdBy !== "default-user") {
       return NextResponse.json(
-        { error: "No autorizado para editar este evento" },
+        { error: "Not authorized to edit this event" },
         { status: 403 }
       );
     }
@@ -91,14 +91,14 @@ export async function PUT(
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Datos inválidos", details: error.errors },
+        { error: "Invalid data", details: error.errors },
         { status: 400 }
       );
     }
 
     console.error("Error updating event:", error);
     return NextResponse.json(
-      { error: "Error al actualizar el evento" },
+      { error: "Error updating event" },
       { status: 500 }
     );
   }
@@ -114,7 +114,7 @@ export async function DELETE(
 
     if (!userId) {
       return NextResponse.json(
-        { error: "No autorizado" },
+        { error: "Unauthorized" },
         { status: 401 }
       );
     }
@@ -127,7 +127,7 @@ export async function DELETE(
     });
 
     if (!event) {
-      return NextResponse.json({ error: "Evento no encontrado" }, { status: 404 });
+      return NextResponse.json({ error: "Event not found" }, { status: 404 });
     }
 
     // Eliminación lógica: actualizar deleteLogic a true
@@ -140,11 +140,11 @@ export async function DELETE(
       },
     });
 
-    return NextResponse.json({ message: "Evento eliminado correctamente" });
+    return NextResponse.json({ message: "Event deleted successfully" });
   } catch (error) {
     console.error("Error deleting event:", error);
     return NextResponse.json(
-      { error: "Error al eliminar el evento" },
+      { error: "Error deleting event" },
       { status: 500 }
     );
   }

@@ -15,33 +15,33 @@ export default async function DashboardPage() {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Bienvenido
+          Welcome
         </h1>
         <p className="text-gray-600">
-          Gestiona tus eventos desde aquí
+          Manage your events from here
         </p>
       </div>
 
       <div className="mb-6 flex justify-between items-center">
-        <h2 className="text-2xl font-semibold text-gray-800">Mis Eventos</h2>
+        <h2 className="text-2xl font-semibold text-gray-800">My Events</h2>
         <Link
           href="/dashboard/events/create"
           className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
         >
-          Crear Evento
+          Create Event
         </Link>
       </div>
 
       {events.length === 0 ? (
         <div className="bg-white rounded-lg shadow p-12 text-center">
           <p className="text-gray-500 text-lg mb-4">
-            No tienes eventos creados aún
+            You don't have any events created yet
           </p>
           <Link
             href="/dashboard/events/create"
             className="text-indigo-600 hover:text-indigo-700 font-semibold"
           >
-            Crear tu primer evento →
+            Create your first event →
           </Link>
         </div>
       ) : (
@@ -56,7 +56,7 @@ export default async function DashboardPage() {
                 {event.title}
               </h3>
               <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                {event.description || "Sin descripción"}
+                {event.description || "No description"}
               </p>
               <div className="space-y-2 text-sm text-gray-500">
                 <p className="flex items-center">

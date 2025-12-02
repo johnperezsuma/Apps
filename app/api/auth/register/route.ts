@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
 
     if (existingUser) {
       return NextResponse.json(
-        { error: "El email ya está registrado" },
+        { error: "Email is already registered" },
         { status: 400 }
       );
     }
@@ -41,20 +41,20 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json(
-      { message: "Usuario creado exitosamente", userId: user.id },
+      { message: "User created successfully", userId: user.id },
       { status: 201 }
     );
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Datos inválidos", details: error.errors },
+        { error: "Invalid data", details: error.errors },
         { status: 400 }
       );
     }
 
     console.error("Error creating user:", error);
     return NextResponse.json(
-      { error: "Error al crear el usuario" },
+      { error: "Error creating user" },
       { status: 500 }
     );
   }

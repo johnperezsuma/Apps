@@ -16,7 +16,7 @@ export default async function Home() {
               Event Manager
             </h1>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Gestiona tus eventos de manera fácil y profesional. Crea, organiza y comparte tus eventos con códigos QR personalizados.
+              Manage your events easily and professionally. Create, organize and share your events with custom QR codes.
             </p>
             <div className="flex gap-4 justify-center">
               {session ? (
@@ -24,7 +24,7 @@ export default async function Home() {
                   href="/dashboard"
                   className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-lg text-lg transition-colors"
                 >
-                  Ir al Dashboard
+                  Go to Dashboard
                 </Link>
               ) : (
                 <>
@@ -32,14 +32,14 @@ export default async function Home() {
                     href="/sign-in"
                     className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-lg text-lg transition-colors"
                   >
-                    Iniciar Sesión
+                    Sign In
                   </Link>
                   {isAdmin && (
                     <Link
                       href="/sign-up"
                       className="inline-block bg-white hover:bg-gray-50 text-indigo-600 font-semibold py-3 px-8 rounded-lg text-lg transition-colors border-2 border-indigo-600"
                     >
-                      Registrarse
+                      Sign Up
                     </Link>
                   )}
                 </>

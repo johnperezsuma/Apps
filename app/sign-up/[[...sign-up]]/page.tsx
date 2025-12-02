@@ -39,12 +39,12 @@ export default function SignUpPage() {
     setError("");
 
     if (password !== confirmPassword) {
-      setError("Las contraseñas no coinciden");
+      setError("Passwords do not match");
       return;
     }
 
     if (password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres");
+      setError("Password must be at least 6 characters");
       return;
     }
 
@@ -66,7 +66,7 @@ export default function SignUpPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        setError(data.error || "Error al crear la cuenta");
+        setError(data.error || "Error creating account");
         setLoading(false);
         return;
       }
@@ -74,7 +74,7 @@ export default function SignUpPage() {
       // Redirigir al login después del registro exitoso
       router.push("/sign-in?registered=true");
     } catch (error) {
-      setError("Error al crear la cuenta");
+      setError("Error creating account");
       setLoading(false);
     }
   };
@@ -83,7 +83,7 @@ export default function SignUpPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="text-center">
-          <p className="text-gray-600">Cargando...</p>
+          <p className="text-gray-600">Loading...</p>
         </div>
       </div>
     );
@@ -98,10 +98,10 @@ export default function SignUpPage() {
       <div className="max-w-md w-full mx-4">
         <div className="bg-white rounded-lg shadow-xl p-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2 text-center">
-            Crear Cuenta
+            Create Account
           </h1>
           <p className="text-gray-600 mb-8 text-center">
-            Regístrate para comenzar a gestionar tus eventos
+            Sign up to start managing your events
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -116,7 +116,7 @@ export default function SignUpPage() {
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
-                Nombre
+                Name
               </label>
               <input
                 id="name"
@@ -125,7 +125,7 @@ export default function SignUpPage() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-                placeholder="Tu nombre"
+                placeholder="Your name"
               />
             </div>
 
@@ -152,7 +152,7 @@ export default function SignUpPage() {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
-                Contraseña
+                Password
               </label>
               <input
                 id="password"
@@ -171,7 +171,7 @@ export default function SignUpPage() {
                 htmlFor="confirmPassword"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
-                Confirmar Contraseña
+                Confirm Password
               </label>
               <input
                 id="confirmPassword"
@@ -190,19 +190,19 @@ export default function SignUpPage() {
               disabled={loading}
               className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? "Creando cuenta..." : "Crear Cuenta"}
+              {loading ? "Creating account..." : "Create Account"}
             </button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              ¿Ya tienes una cuenta?{" "}
-              <Link
-                href="/sign-in"
-                className="text-indigo-600 hover:text-indigo-700 font-semibold"
-              >
-                Inicia sesión
-              </Link>
+              Already have an account?{" "}
+                <Link
+                  href="/sign-in"
+                  className="text-indigo-600 hover:text-indigo-700 font-semibold"
+                >
+                Sign in
+                </Link>
             </p>
           </div>
         </div>

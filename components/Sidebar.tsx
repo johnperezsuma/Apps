@@ -41,7 +41,7 @@ export function Sidebar() {
             }`}
           >
             <span className="mr-3">🏠</span>
-            Inicio
+            Home
           </Link>
           <Link
             href="/dashboard/events"
@@ -52,7 +52,7 @@ export function Sidebar() {
             }`}
           >
             <span className="mr-3">📅</span>
-            Eventos
+            Events
           </Link>
           <Link
             href="/dashboard/qr-scanner"
@@ -63,7 +63,7 @@ export function Sidebar() {
             }`}
           >
             <span className="mr-3">📷</span>
-            Escáner QR
+            QR Scanner
           </Link>
         </nav>
 
@@ -75,7 +75,7 @@ export function Sidebar() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900 truncate">
-                  {session?.user?.name || session?.user?.email || "Usuario"}
+                  {session?.user?.name || session?.user?.email || "User"}
                 </p>
                 <p className="text-xs text-gray-500 truncate">
                   {session?.user?.email}
@@ -87,7 +87,7 @@ export function Sidebar() {
             onClick={handleSignOut}
             className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-4 rounded-lg transition-colors text-sm"
           >
-            Cerrar Sesión
+            Sign Out
           </button>
         </div>
       </div>

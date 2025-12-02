@@ -66,12 +66,12 @@ export default async function EventDetailPage({
                 {event.attendees.length}
               </span>
               <span className="text-indigo-600 text-sm">
-                {event.attendees.length === 1 ? "asistente" : "asistentes"}
+                {event.attendees.length === 1 ? "attendee" : "attendees"}
               </span>
             </div>
           </div>
           <p className="text-gray-600">
-            Detalles del evento
+            Event details
           </p>
         </div>
         <div className="flex gap-2">
@@ -79,7 +79,7 @@ export default async function EventDetailPage({
             href={`/dashboard/events/${event.id}/edit`}
             className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
           >
-            Editar
+            Edit
           </Link>
           <DeleteEventButton eventId={event.id} />
         </div>
@@ -88,48 +88,48 @@ export default async function EventDetailPage({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            Información del Evento
+            Event Information
           </h2>
           <div className="space-y-4">
             <div>
               <label className="text-sm font-medium text-gray-500">
-                Descripción
+                Description
               </label>
               <p className="mt-1 text-gray-900">
-                {event.description || "Sin descripción"}
+                {event.description || "No description"}
               </p>
             </div>
             <div>
               <label className="text-sm font-medium text-gray-500">
-                Ubicación
+                Location
               </label>
               <p className="mt-1 text-gray-900">{event.location}</p>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-500">Ciudad</label>
+              <label className="text-sm font-medium text-gray-500">City</label>
               <p className="mt-1 text-gray-900">{event.city}</p>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-500">Fecha</label>
+              <label className="text-sm font-medium text-gray-500">Date</label>
               <p className="mt-1 text-gray-900">
                 {format(new Date(event.date), "PPP", { locale: es })}
               </p>
             </div>
             <div>
-              <label className="text-sm font-medium text-gray-500">Hora</label>
+              <label className="text-sm font-medium text-gray-500">Time</label>
               <p className="mt-1 text-gray-900">
                 {event.startTime} - {event.endTime}
               </p>
             </div>
             <div>
               <label className="text-sm font-medium text-gray-500">
-                Creado por
+                Created by
               </label>
               <p className="mt-1 text-gray-900">{event.userCreator}</p>
             </div>
             <div>
               <label className="text-sm font-medium text-gray-500">
-                URL del Evento
+                Event URL
               </label>
               <p className="mt-1 text-sm text-indigo-600 break-all">
                 {eventUrl}
@@ -140,7 +140,7 @@ export default async function EventDetailPage({
 
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-semibold text-gray-900 mb-4">
-            Código QR
+            QR Code
           </h2>
           {event.qrImage ? (
             <div className="flex flex-col items-center">
@@ -158,22 +158,22 @@ export default async function EventDetailPage({
                 download={`qr-${event.title.replace(/\s+/g, "-")}.png`}
                 className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
               >
-                Descargar QR
+                Download QR
               </a>
             </div>
           ) : (
             <div className="text-center py-12 text-gray-500">
-              <p>No hay código QR generado</p>
+              <p>No QR code generated</p>
             </div>
           )}
         </div>
       </div>
 
-      {/* Tabla de Asistentes */}
+      {/* Attendees Table */}
       <div className="mt-8 bg-white rounded-lg shadow p-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold text-gray-900">
-            Asistentes Registrados
+            Registered Attendees
           </h2>
           <div className="flex items-center gap-2 px-4 py-2 bg-indigo-50 border border-indigo-200 rounded-lg">
             <svg
@@ -193,7 +193,7 @@ export default async function EventDetailPage({
               {event.attendees.length}
             </span>
             <span className="text-indigo-600 text-sm">
-              {event.attendees.length === 1 ? "asistente" : "asistentes"}
+              {event.attendees.length === 1 ? "attendee" : "attendees"}
             </span>
           </div>
         </div>
@@ -213,9 +213,9 @@ export default async function EventDetailPage({
                 d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
               />
             </svg>
-            <p>No hay asistentes registrados aún</p>
+            <p>No attendees registered yet</p>
             <p className="text-sm mt-2">
-              Los usuarios se registrarán cuando escaneen su código QR
+              Users will register when they scan their QR code
             </p>
           </div>
         ) : (
@@ -227,13 +227,13 @@ export default async function EventDetailPage({
                     #
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Nombre
+                    Name
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Email
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Fecha de Registro
+                    Registration Date
                   </th>
                 </tr>
               </thead>
@@ -254,7 +254,7 @@ export default async function EventDetailPage({
                         </div>
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900">
-                            {attendee.user.name || "Sin nombre"}
+                            {attendee.user.name || "No name"}
                           </div>
                         </div>
                       </div>
@@ -263,7 +263,7 @@ export default async function EventDetailPage({
                       {attendee.user.email}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {format(new Date(attendee.createdAt), "PPP 'a las' HH:mm", {
+                      {format(new Date(attendee.createdAt), "PPP 'at' HH:mm", {
                         locale: es,
                       })}
                     </td>

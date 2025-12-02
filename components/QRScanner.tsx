@@ -40,7 +40,7 @@ function CameraPermissionModal({
       <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-gray-900">
-            Permisos de Cámara Requeridos
+            Camera Permissions Required
           </h2>
           <button
             onClick={onClose}
@@ -67,17 +67,17 @@ function CameraPermissionModal({
             </svg>
           </div>
           <p className="text-gray-700 mb-4">
-            Para escanear códigos QR, necesitas otorgar permisos de cámara a este sitio.
+            To scan QR codes, you need to grant camera permissions to this site.
           </p>
           <div className="bg-gray-50 p-4 rounded-lg mb-4">
             <p className="text-sm font-semibold text-gray-900 mb-2">
-              Instrucciones:
+              Instructions:
             </p>
             <ol className="text-sm text-gray-700 space-y-2 list-decimal list-inside">
-              <li>Haz clic en el ícono de candado o información en la barra de direcciones</li>
-              <li>Busca la sección de "Permisos" o "Cámara"</li>
-              <li>Selecciona "Permitir" para el acceso a la cámara</li>
-              <li>Recarga la página o haz clic en "Reintentar"</li>
+              <li>Click on the lock or information icon in the address bar</li>
+              <li>Look for the "Permissions" or "Camera" section</li>
+              <li>Select "Allow" for camera access</li>
+              <li>Reload the page or click "Retry"</li>
             </ol>
           </div>
         </div>
@@ -87,13 +87,13 @@ function CameraPermissionModal({
             onClick={onClose}
             className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition-colors"
           >
-            Cerrar
+            Close
           </button>
           <button
             onClick={onRetry}
             className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
           >
-            Reintentar
+            Retry
           </button>
         </div>
       </div>
@@ -131,7 +131,7 @@ function QRScannerModal({
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || "Error al registrar el asistente");
+        throw new Error(data.error || "Error registering attendee");
       }
 
       setSuccess(true);
@@ -140,7 +140,7 @@ function QRScannerModal({
         onClose();
       }, 1500);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Error desconocido");
+      setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
       setIsRegistering(false);
     }
@@ -153,7 +153,7 @@ function QRScannerModal({
       <div className="bg-white rounded-lg shadow-xl p-6 max-w-md w-full mx-4">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-gray-900">
-            Información del Evento
+            Event Information
           </h2>
           <button
             onClick={onClose}
@@ -166,7 +166,7 @@ function QRScannerModal({
         {eventInfo && (
           <div className="mb-6">
             <p className="text-lg font-semibold text-gray-700 mb-2">
-              Nombre del Evento:
+              Event Name:
             </p>
             <p className="text-xl text-gray-900">{eventInfo.title}</p>
           </div>
@@ -181,7 +181,7 @@ function QRScannerModal({
         {success && (
           <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
             <p className="text-green-600 text-sm">
-              ¡Usuario registrado exitosamente!
+              User registered successfully!
             </p>
           </div>
         )}
@@ -191,14 +191,14 @@ function QRScannerModal({
             onClick={onClose}
             className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg transition-colors"
           >
-            Cancelar
+            Cancel
           </button>
           <button
             onClick={handleRegister}
             disabled={isRegistering || success}
             className="flex-1 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
           >
-            {isRegistering ? "Registrando..." : "Registrar Usuario al Evento"}
+            {isRegistering ? "Registering..." : "Register User to Event"}
           </button>
         </div>
       </div>
@@ -229,7 +229,7 @@ export function QRScanner() {
       // Verificar que el elemento existe
       const element = document.getElementById("qr-reader");
       if (!element) {
-        throw new Error("Elemento del escáner no encontrado");
+        throw new Error("Scanner element not found");
       }
 
       const html5QrCode = new Html5Qrcode("qr-reader");
@@ -273,7 +273,7 @@ export function QRScanner() {
         setPermissionModalOpen(true);
       } else {
         setCameraError(
-          "No se pudo acceder a la cámara. Verifica que tengas permisos de cámara y que no esté siendo usada por otra aplicación."
+          "Could not access camera. Please verify you have camera permissions and that it is not being used by another application."
         );
       }
     }
@@ -304,12 +304,12 @@ export function QRScanner() {
       } catch {
         // Si no es JSON, intentar parsear como formato simple
         // Formato esperado: {"id_user":"...","id_event":"..."}
-        throw new Error("Formato de QR inválido");
+        throw new Error("Invalid QR format");
       }
 
       // Validar que tenga los campos necesarios
       if (!qrData.id_user || !qrData.id_event) {
-        throw new Error("El QR no contiene la información necesaria");
+        throw new Error("QR code does not contain required information");
       }
 
       setScannedData(qrData);
@@ -317,7 +317,7 @@ export function QRScanner() {
       // Obtener información del evento
       const eventResponse = await fetch(`/api/events/${qrData.id_event}`);
       if (!eventResponse.ok) {
-        throw new Error("Evento no encontrado");
+        throw new Error("Event not found");
       }
 
       const event = await eventResponse.json();
@@ -331,7 +331,7 @@ export function QRScanner() {
       setError(
         err instanceof Error
           ? err.message
-          : "Error al procesar el código QR"
+          : "Error processing QR code"
       );
       // Reiniciar el escáner después de un error
       setTimeout(() => {
@@ -365,10 +365,10 @@ export function QRScanner() {
     <div className="w-full">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Escáner de Código QR
+          QR Code Scanner
         </h1>
         <p className="text-gray-600">
-          Escanea el código QR de un usuario para registrarlo en un evento
+          Scan a user's QR code to register them for an event
         </p>
       </div>
 
@@ -391,26 +391,26 @@ export function QRScanner() {
               </svg>
             </div>
             <p className="text-gray-600 mb-4">
-              Haz clic en el botón para iniciar el escáner
+              Click the button to start the scanner
             </p>
             <button
               onClick={startScanning}
               className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
             >
-              Iniciar Escáner
+              Start Scanner
             </button>
           </div>
         ) : (
           <div>
             <div className="mb-4 flex justify-between items-center">
               <p className="text-gray-700 font-medium">
-                Escaneando código QR...
+                Scanning QR code...
               </p>
               <button
                 onClick={stopScanning}
                 className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm"
               >
-                Detener Escáner
+                Stop Scanner
               </button>
             </div>
             <div 
