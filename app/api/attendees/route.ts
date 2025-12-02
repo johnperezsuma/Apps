@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     const validatedData = registerAttendeeSchema.parse(body);
 
     // Verificar que el evento existe
-    const event = await prisma.event.findFirst({
+    const event = await prisma.events.findFirst({
       where: {
         id: validatedData.eventId,
         deleteLogic: false,
@@ -50,7 +50,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Verificar si el usuario ya está registrado
-    const existingAttendee = await prisma.eventAttendee.findUnique({
+    const existingAttendee = await prisma.event_attendees.findUnique({
       where: {
         eventId_userId: {
           eventId: validatedData.eventId,
@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Registrar el asistente
-    const attendee = await prisma.eventAttendee.create({
+    const attendee = await prisma.event_attendees.create({
       data: {
         eventId: validatedData.eventId,
         userId: validatedData.userId,
@@ -122,7 +122,7 @@ export async function GET(request: NextRequest) {
 
     if (eventId) {
       // Obtener todos los asistentes de un evento específico
-      const attendees = await prisma.eventAttendee.findMany({
+      const attendees = await prisma.event_attendees.findMany({
         where: {
           eventId: eventId,
         },
@@ -144,7 +144,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Obtener todos los eventos a los que el usuario está registrado
-    const userAttendances = await prisma.eventAttendee.findMany({
+    const userAttendances = await prisma.event_attendees.findMany({
       where: {
         userId: userId,
       },

@@ -8,18 +8,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model events {
-  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title       String
-  description String?
-  category    String?
-  location    String
-  city        String?
-  qr_data     String?
-  date        DateTime @db.Date
-  time        DateTime @db.Time(6)
-}
-
 model user_notification_tokens {
   id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   user_id      String   @db.Uuid
@@ -72,12 +60,12 @@ model users {
   user_notification_tokens user_notification_tokens[]
   user_notifications       user_notifications[]
   user_onboarding          user_onboarding?
-  eventAttendees           EventAttendee[]
+  eventAttendees           event_attendees[]
 }
 
 
 
-model UserDashboard {
+model users_dashboard {
   id            String    @id @default(uuid())
   name          String?
   email         String    @unique
@@ -86,11 +74,11 @@ model UserDashboard {
   image         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  accounts      AccountDashboard[]
-  sessions      SessionDashboard[]
+  accounts      account_dashboard[]
+  sessions      session_dashboard[]
 }
 
-model AccountDashboard {
+model account_dashboard {
   id                String  @id @default(uuid())
   userId            String
   type              String
@@ -104,20 +92,20 @@ model AccountDashboard {
   id_token          String? @db.Text
   session_state     String?
 
-  UserDashboard     UserDashboard @relation(fields: [userId], references: [id], onDelete: Cascade)
+  UserDashboard     users_dashboard @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
-model SessionDashboard {
+model session_dashboard {
   id            String   @id @default(uuid())
   sessionToken  String   @unique
   userId        String
   expires       DateTime
-  UserDashboard UserDashboard     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  UserDashboard users_dashboard     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model VerificationTokenDashboard {
+model verification_token_dashboard {
   identifier String
   token      String   @unique
   expires    DateTime
@@ -125,7 +113,7 @@ model VerificationTokenDashboard {
   @@unique([identifier, token])
 }
 
-model Event {
+model events {
   id          String   @id @default(uuid())
 
   title        String
@@ -146,14 +134,14 @@ model Event {
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
 
-  attendees    EventAttendee[]
+  attendees    event_attendees[]
 }
 
-model EventAttendee {
+model event_attendees {
   id          String   @id @default(uuid()) @db.Uuid
   eventId     String   @db.Text
   userId      String   @db.Uuid
-  event       Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  event       events    @relation(fields: [eventId], references: [id], onDelete: Cascade)
   user        users     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt   DateTime @default(now())
 

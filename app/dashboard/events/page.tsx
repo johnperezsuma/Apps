@@ -6,7 +6,7 @@ import { DeleteEventTableButton } from "@/components/DeleteEventTableButton";
 
 export default async function EventsPage() {
   // Sin autenticación por el momento - mostrar todos los eventos no eliminados lógicamente
-  const events = await prisma.event.findMany({
+  const events = await prisma.events.findMany({
     where: {
       deleteLogic: false,
     },

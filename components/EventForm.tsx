@@ -52,6 +52,10 @@ export function EventForm({ event }: EventFormProps) {
     setError(null);
 
     try {
+      if (event && !event.id) {
+        throw new Error("El evento no tiene un ID válido");
+      }
+
       const url = event
         ? `/api/events/${event.id}`
         : "/api/events";

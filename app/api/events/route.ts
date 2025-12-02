@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
 
     // Crear el evento (el ID se generará en Prisma)
     // Sin autenticación por el momento - usar valores por defecto
-    const event = await prisma.event.create({
+    const event = await prisma.events.create({
       data: {
         title: validatedData.title,
         description: validatedData.description,
@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
       finalQrImageUrl = finalQrDataURL;
       
       // Actualizar el evento con el QR correcto
-      await prisma.event.update({
+      await prisma.events.update({
         where: { id: event.id },
         data: { qrImage: finalQrImageUrl },
       });
@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     // Sin autenticación por el momento - mostrar todos los eventos
-    const events = await prisma.event.findMany({
+    const events = await prisma.events.findMany({
       orderBy: {
         createdAt: "desc",
       },

@@ -7,11 +7,12 @@ import { QRImage } from "@/components/QRImage";
 export default async function PublicEventPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const event = await prisma.event.findFirst({
+  const { id } = await params;
+  const event = await prisma.events.findFirst({
     where: {
-      id: params.id,
+      id: id,
       deleteLogic: false,
     },
   });

@@ -5,7 +5,7 @@ import { es } from "date-fns/locale/es";
 
 export default async function DashboardPage() {
   // Sin autenticación por el momento - mostrar todos los eventos
-  const events = await prisma.event.findMany({
+  const events = await prisma.events.findMany({
     orderBy: {
       createdAt: "desc",
     },

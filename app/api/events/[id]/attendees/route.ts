@@ -4,9 +4,10 @@ import { getAuth } from "@/lib/auth-helpers";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const { userId } = await getAuth();
 
     if (!userId) {
@@ -17,9 +18,9 @@ export async function GET(
     }
 
     // Verificar que el evento existe
-    const event = await prisma.event.findFirst({
+    const event = await prisma.events.findFirst({
       where: {
-        id: params.id,
+        id: id,
         deleteLogic: false,
       },
     });
@@ -32,8 +33,8 @@ export async function GET(
     }
 
     // Obtener información del evento con asistentes
-    const eventWithAttendees = await prisma.event.findUnique({
-      where: { id: params.id },
+    const eventWithAttendees = await prisma.events.findUnique({
+      where: { id: id },
       include: {
         attendees: {
           include: {
